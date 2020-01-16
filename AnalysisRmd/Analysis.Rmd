@@ -1,0 +1,31 @@
+---
+title: "Analysis 3D lottery Ticket"
+output: html_notebook
+---
+# load library
+```{r}
+library(dplyr)
+library(readxl)
+library(ggplot2)
+library(lubridate)
+```
+
+
+# read data
+```{r}
+data <- read_excel("data/3D.xls")
+```
+# select data
+```{r}
+Data <- X3D %>% select(Date,Number1,Number2,Number2__1)
+colnames(Data) <- c('Date','Num1','Num2','Num3')
+save(Data,file = './data/Data.RData')
+```
+# change data type
+```{r}
+Data$Date <- ymd(Data$Date)
+Data$Num1 <- as.numeric(Data$Num1)
+Data$Num2 <- as.numeric(Data$Num2)
+Data$Num3 <- as.numeric(Data$Num3)
+```
+
