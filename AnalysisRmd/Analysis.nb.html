@@ -1829,10 +1829,82 @@ Data$Num3 &lt;- as.numeric(Data$Num3)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="simulation-100" class="section level1">
+<h1>simulation 100</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubiA9IDEwMFxucmFuZG9tTGlzdCA8LSByZXBsaWNhdGUobj1uLGV4cHI9bGlzdCgpKVxucmFuZG9tTGlzdENvbSA8LSByZXBsaWNhdGUobj1uLGV4cHI9bGlzdCgpKVxuc2V0LnNlZWQoNDIpXG5mb3IoaSBpbiAxOm4pe1xuICByYW5kb21MaXN0W1tpXV0gPC0gcmFuZG9tQnV5KERhdGEgPSBEYXRhKVxuICByYW5kb21MaXN0Q29tW1tpXV0gPC0gcmFuZG9tQnV5Q29tKERhdGEgPSBEYXRhKVxufVxuYGBgIn0= -->
+<pre class="r"><code>n = 100
+randomList &lt;- replicate(n=n,expr=list())
+randomListCom &lt;- replicate(n=n,expr=list())
+set.seed(42)
+for(i in 1:n){
+  randomList[[i]] &lt;- randomBuy(Data = Data)
+  randomListCom[[i]] &lt;- randomBuyCom(Data = Data)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZG9tRGF0YUZyYW1lIDwtIGRhdGEuZnJhbWUoJ2NvdW50Jz1jKDE6biksJ3dpblJhdGUnPWMoMTpuKSwnd2luTW9uZXknPWMoMTpuKSlcbnJhbmRvbURhdGFGcmFtZUNvbSA8LSBkYXRhLmZyYW1lKCdjb3VudDMnPWMoMTpuKSwnY291bnQ2Jz1jKDE6biksJ3dpblJhdGUnPWMoMTpuKSwnd2luTW9uZXknPWMoMTpuKSlcbmZvcihpIGluIDE6MTAwKXtcbiAgcmFuZG9tRGF0YUZyYW1lW2ksXSA8LSBkYXRhLmZyYW1lKCdjb3VudCc9cmFuZG9tTGlzdFtbaV1dJGNvdW50LCd3aW5SYXRlJz1yYW5kb21MaXN0W1tpXV0kd2luUmF0ZSwnd2luTW9uZXknPXJhbmRvbUxpc3RbW2ldXSR3aW5Nb25leSlcbiAgICByYW5kb21EYXRhRnJhbWVDb21baSxdIDwtIGRhdGEuZnJhbWUoJ2NvdW50MSc9cmFuZG9tTGlzdENvbVtbaV1dJGNvdW50MSwnY291bnQzJz1yYW5kb21MaXN0Q29tW1tpXV0kY291bnQzLCdjb3VudDYnPXJhbmRvbUxpc3RDb21bW2ldXSRjb3VudDYsJ3dpblJhdGUnPXJhbmRvbUxpc3RDb21bW2ldXSR3aW5SYXRlLCd3aW5Nb25leSc9cmFuZG9tTGlzdENvbVtbaV1dJHdpbk1vbmV5KVxufVxuYGBgIn0= -->
+<pre class="r"><code>randomDataFrame &lt;- data.frame(&#39;count&#39;=c(1:n),&#39;winRate&#39;=c(1:n),&#39;winMoney&#39;=c(1:n))
+randomDataFrameCom &lt;- data.frame(&#39;count3&#39;=c(1:n),&#39;count6&#39;=c(1:n),&#39;winRate&#39;=c(1:n),&#39;winMoney&#39;=c(1:n))
+for(i in 1:100){
+  randomDataFrame[i,] &lt;- data.frame(&#39;count&#39;=randomList[[i]]$count,&#39;winRate&#39;=randomList[[i]]$winRate,&#39;winMoney&#39;=randomList[[i]]$winMoney)
+    randomDataFrameCom[i,] &lt;- data.frame(&#39;count1&#39;=randomListCom[[i]]$count1,&#39;count3&#39;=randomListCom[[i]]$count3,&#39;count6&#39;=randomListCom[[i]]$count6,&#39;winRate&#39;=randomListCom[[i]]$winRate,&#39;winMoney&#39;=randomListCom[[i]]$winMoney)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZGF0YS5mcmFtZShjb3VudDEgPSByYW5kb21MaXN0Q29tW1tpXV0kY291bnQxLCBjb3VudDMgPSByYW5kb21MaXN0Q29tW1tpXV0kY291bnQzLCAgOiBcbiAg5Y+C5pWw5YC85oSP5ZGz552A5LiN5ZCM55qE6KGM5pWwOiAwLCAxXG4ifQ== -->
+<pre><code>Error in data.frame(count1 = randomListCom[[i]]$count1, count3 = randomListCom[[i]]$count3,  : 
+  参数值意味着不同的行数: 0, 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShyYW5kb21EYXRhRnJhbWUpXG5gYGAifQ== -->
+<pre class="r"><code>summary(randomDataFrame)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBjb3VudCAgICAgICAgIHdpblJhdGUgICAgICAgICAgICAgd2luTW9uZXkgICAgXG4gTWluLiAgIDowLjAwICAgTWluLiAgIDowLjAwMDAwMDAgICBNaW4uICAgOi02NTYwICBcbiAxc3QgUXUuOjIuMDAgICAxc3QgUXUuOjAuMDAwNjA5OCAgIDFzdCBRdS46LTQ1NjAgIFxuIE1lZGlhbiA6NC4wMCAgIE1lZGlhbiA6MC4wMDEyMTk1ICAgTWVkaWFuIDotMjU2MCAgXG4gTWVhbiAgIDozLjY0ICAgTWVhbiAgIDowLjAwMTEwOTggICBNZWFuICAgOi0yOTIwICBcbiAzcmQgUXUuOjUuMDAgICAzcmQgUXUuOjAuMDAxNTI0NCAgIDNyZCBRdS46LTE1NjAgIFxuIE1heC4gICA6OS4wMCAgIE1heC4gICA6MC4wMDI3NDM5ICAgTWF4LiAgIDogMjQ0MCAgXG4ifQ== -->
+<pre><code>     count         winRate             winMoney    
+ Min.   :0.00   Min.   :0.0000000   Min.   :-6560  
+ 1st Qu.:2.00   1st Qu.:0.0006098   1st Qu.:-4560  
+ Median :4.00   Median :0.0012195   Median :-2560  
+ Mean   :3.64   Mean   :0.0011098   Mean   :-2920  
+ 3rd Qu.:5.00   3rd Qu.:0.0015244   3rd Qu.:-1560  
+ Max.   :9.00   Max.   :0.0027439   Max.   : 2440  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud3JpdGUuY3N2KHN1bW1hcnkocmFuZG9tRGF0YUZyYW1lKSxmaWxlID0gJy4vZGF0YS9yYW5kb21EYXRhRnJhbWUuY3N2JylcbmBgYCJ9 -->
+<pre class="r"><code>write.csv(summary(randomDataFrame),file = &#39;./data/randomDataFrame.csv&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShyYW5kb21EYXRhRnJhbWVDb20pXG5gYGAifQ== -->
+<pre class="r"><code>summary(randomDataFrameCom)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBjb3VudDMgICAgICAgICBjb3VudDYgICAgICAgICB3aW5SYXRlICAgICAgICAgICAgd2luTW9uZXkgICAgXG4gTWluLiAgIDowLjAwICAgTWluLiAgIDogNC4wMCAgIE1pbi4gICA6MC4wMDI3NDQgICBNaW4uICAgOi01MDAzICBcbiAxc3QgUXUuOjEuMDAgICAxc3QgUXUuOjEyLjAwICAgMXN0IFF1LjowLjAwMzk2MyAgIDFzdCBRdS46LTM5NjUgIFxuIE1lZGlhbiA6Mi4wMCAgIE1lZGlhbiA6MTMuMDAgICBNZWRpYW4gOjAuMDA1MDMwICAgTWVkaWFuIDotMzI3MyAgXG4gTWVhbiAgIDoyLjUyICAgTWVhbiAgIDoxMy41MiAgIE1lYW4gICA6MC4wMDQ4OTAgICBNZWFuICAgOi0zMzQ5ICBcbiAzcmQgUXUuOjQuMDAgICAzcmQgUXUuOjE1LjI1ICAgM3JkIFF1LjowLjAwNTQ4OCAgIDNyZCBRdS46LTI3NTQgIFxuIE1heC4gICA6Ny4wMCAgIE1heC4gICA6MjAuMDAgICBNYXguICAgOjAuMDA3NjIyICAgTWF4LiAgIDotMTM3MCAgXG4ifQ== -->
+<pre><code>     count3         count6         winRate            winMoney    
+ Min.   :0.00   Min.   : 4.00   Min.   :0.002744   Min.   :-5003  
+ 1st Qu.:1.00   1st Qu.:12.00   1st Qu.:0.003963   1st Qu.:-3965  
+ Median :2.00   Median :13.00   Median :0.005030   Median :-3273  
+ Mean   :2.52   Mean   :13.52   Mean   :0.004890   Mean   :-3349  
+ 3rd Qu.:4.00   3rd Qu.:15.25   3rd Qu.:0.005488   3rd Qu.:-2754  
+ Max.   :7.00   Max.   :20.00   Max.   :0.007622   Max.   :-1370  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFuYWx5c2lzIDNEIGxvdHRlcnkgVGlja2V0Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCiMgbG9hZCBsaWJyYXJ5DQpgYGB7cn0NCmxpYnJhcnkoZHBseXIpDQpsaWJyYXJ5KHJlYWR4bCkNCmxpYnJhcnkoZ2dwbG90MikNCmxpYnJhcnkobHVicmlkYXRlKQ0KYGBgDQoNCg0KIyByZWFkIGRhdGENCmBgYHtyfQ0KZGF0YSA8LSByZWFkX2V4Y2VsKCJkYXRhLzNELnhscyIpDQpgYGANCiMgc2VsZWN0IGRhdGENCmBgYHtyfQ0KRGF0YSA8LSBYM0QgJT4lIHNlbGVjdChEYXRlLE51bWJlcjEsTnVtYmVyMixOdW1iZXIyX18xKQ0KY29sbmFtZXMoRGF0YSkgPC0gYygnRGF0ZScsJ051bTEnLCdOdW0yJywnTnVtMycpDQpzYXZlKERhdGEsZmlsZSA9ICcuL2RhdGEvRGF0YS5SRGF0YScpDQpgYGANCiMgY2hhbmdlIGRhdGEgdHlwZQ0KYGBge3J9DQpEYXRhJERhdGUgPC0geW1kKERhdGEkRGF0ZSkNCkRhdGEkTnVtMSA8LSBhcy5udW1lcmljKERhdGEkTnVtMSkNCkRhdGEkTnVtMiA8LSBhcy5udW1lcmljKERhdGEkTnVtMikNCkRhdGEkTnVtMyA8LSBhcy5udW1lcmljKERhdGEkTnVtMykNCmBgYA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFuYWx5c2lzIDNEIGxvdHRlcnkgVGlja2V0Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCiMgbG9hZCBsaWJyYXJ5DQpgYGB7cn0NCmxpYnJhcnkoZHBseXIpDQpsaWJyYXJ5KHJlYWR4bCkNCmxpYnJhcnkoZ2dwbG90MikNCmxpYnJhcnkobHVicmlkYXRlKQ0KbGlicmFyeShjYXQpDQpgYGANCg0KDQojIHJlYWQgZGF0YQ0KYGBge3J9DQpkYXRhIDwtIHJlYWRfZXhjZWwoImRhdGEvM0QueGxzIikNCmBgYA0KIyBzZWxlY3QgZGF0YQ0KYGBge3J9DQpEYXRhIDwtIFgzRCAlPiUgc2VsZWN0KERhdGUsTnVtYmVyMSxOdW1iZXIyLE51bWJlcjJfXzEpDQpjb2xuYW1lcyhEYXRhKSA8LSBjKCdEYXRlJywnTnVtMScsJ051bTInLCdOdW0zJykNCnNhdmUoRGF0YSxmaWxlID0gJy4vZGF0YS9EYXRhLlJEYXRhJykNCmBgYA0KIyBjaGFuZ2UgZGF0YSB0eXBlDQpgYGB7cn0NCkRhdGEkRGF0ZSA8LSB5bWQoRGF0YSREYXRlKQ0KRGF0YSROdW0xIDwtIGFzLm51bWVyaWMoRGF0YSROdW0xKQ0KRGF0YSROdW0yIDwtIGFzLm51bWVyaWMoRGF0YSROdW0yKQ0KRGF0YSROdW0zIDwtIGFzLm51bWVyaWMoRGF0YSROdW0zKQ0KYGBgDQoNCg0KIyBzaW11bGF0aW9uIDEwMA0KYGBge3J9DQpuID0gMTAwDQpyYW5kb21MaXN0IDwtIHJlcGxpY2F0ZShuPW4sZXhwcj1saXN0KCkpDQpyYW5kb21MaXN0Q29tIDwtIHJlcGxpY2F0ZShuPW4sZXhwcj1saXN0KCkpDQpzZXQuc2VlZCg0MikNCmZvcihpIGluIDE6bil7DQogIHJhbmRvbUxpc3RbW2ldXSA8LSByYW5kb21CdXkoRGF0YSA9IERhdGEpDQogIHJhbmRvbUxpc3RDb21bW2ldXSA8LSByYW5kb21CdXlDb20oRGF0YSA9IERhdGEpDQp9DQpgYGANCg0KYGBge3J9DQpyYW5kb21EYXRhRnJhbWUgPC0gZGF0YS5mcmFtZSgnY291bnQnPWMoMTpuKSwnd2luUmF0ZSc9YygxOm4pLCd3aW5Nb25leSc9YygxOm4pKQ0KcmFuZG9tRGF0YUZyYW1lQ29tIDwtIGRhdGEuZnJhbWUoJ2NvdW50Myc9YygxOm4pLCdjb3VudDYnPWMoMTpuKSwnd2luUmF0ZSc9YygxOm4pLCd3aW5Nb25leSc9YygxOm4pKQ0KZm9yKGkgaW4gMToxMDApew0KICByYW5kb21EYXRhRnJhbWVbaSxdIDwtIGRhdGEuZnJhbWUoJ2NvdW50Jz1yYW5kb21MaXN0W1tpXV0kY291bnQsJ3dpblJhdGUnPXJhbmRvbUxpc3RbW2ldXSR3aW5SYXRlLCd3aW5Nb25leSc9cmFuZG9tTGlzdFtbaV1dJHdpbk1vbmV5KQ0KICAgIHJhbmRvbURhdGFGcmFtZUNvbVtpLF0gPC0gZGF0YS5mcmFtZSgnY291bnQxJz1yYW5kb21MaXN0Q29tW1tpXV0kY291bnQxLCdjb3VudDMnPXJhbmRvbUxpc3RDb21bW2ldXSRjb3VudDMsJ2NvdW50Nic9cmFuZG9tTGlzdENvbVtbaV1dJGNvdW50Niwnd2luUmF0ZSc9cmFuZG9tTGlzdENvbVtbaV1dJHdpblJhdGUsJ3dpbk1vbmV5Jz1yYW5kb21MaXN0Q29tW1tpXV0kd2luTW9uZXkpDQp9DQpgYGANCg0KYGBge3J9DQpzdW1tYXJ5KHJhbmRvbURhdGFGcmFtZSkNCmBgYA0KDQpgYGB7cn0NCndyaXRlLmNzdihzdW1tYXJ5KHJhbmRvbURhdGFGcmFtZSksZmlsZSA9ICcuL2RhdGEvcmFuZG9tRGF0YUZyYW1lLmNzdicpDQpgYGANCg0KYGBge3J9DQpzdW1tYXJ5KHJhbmRvbURhdGFGcmFtZUNvbSkNCmBgYA0KDQo=</div>
 
 
 

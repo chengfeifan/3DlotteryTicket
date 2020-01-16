@@ -50,7 +50,6 @@ randomBuyCom <- function(Data){
   dataAll <- data %>% left_join(dataRandom,by = 'Date')
   count6 <- 0
   count3 <- 0
-  count1 <- 0
   for(i in 1:nrow(dataAll)){
     data1 <- str2chrSet(as.character(dataAll$Data[i]))
     data2 <- str2chrSet(as.character(dataAll$num3D[i]))
@@ -63,12 +62,10 @@ randomBuyCom <- function(Data){
         count3 <- count3 + 1
       }
     }
-    if(setequal(data1, data2) & length(table(data1)) == 1 & length(table(data2)) == 1 )
-      count1 <- count1 + 1
   }
   winRate <- (count3 + count6)/nrow(dataAll)
-  winMoney <- count6*173 + count3*346 + count1*1040 - 2 * nrow(dataAll)
-  result <- list('Date'=Data$Date,'count1'=count1, 'count3'=count3, 'count6'=count6, 'winRate'=winRate, 'winMoney'=winMoney)
+  winMoney <- count6*173 + count3*346 - 2 * nrow(dataAll)
+  result <- list('Date'=Data$Date, 'count3'=count3, 'count6'=count6, 'winRate'=winRate, 'winMoney'=winMoney)
   class(result) <- 'winRateCom'
   return(result)
 }
@@ -83,4 +80,5 @@ print.winRateCom <- function(winRate){
   cat('您的中奖概率: ',winRate$winRate,'\n')
   cat('您的盈利率为',winRate$winMoney,'元')
 }
+
 

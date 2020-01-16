@@ -8,6 +8,7 @@ library(dplyr)
 library(readxl)
 library(ggplot2)
 library(lubridate)
+library(cat)
 ```
 
 
@@ -27,5 +28,39 @@ Data$Date <- ymd(Data$Date)
 Data$Num1 <- as.numeric(Data$Num1)
 Data$Num2 <- as.numeric(Data$Num2)
 Data$Num3 <- as.numeric(Data$Num3)
+```
+
+
+# simulation 100
+```{r}
+n = 100
+randomList <- replicate(n=n,expr=list())
+randomListCom <- replicate(n=n,expr=list())
+set.seed(42)
+for(i in 1:n){
+  randomList[[i]] <- randomBuy(Data = Data)
+  randomListCom[[i]] <- randomBuyCom(Data = Data)
+}
+```
+
+```{r}
+randomDataFrame <- data.frame('count'=c(1:n),'winRate'=c(1:n),'winMoney'=c(1:n))
+randomDataFrameCom <- data.frame('count3'=c(1:n),'count6'=c(1:n),'winRate'=c(1:n),'winMoney'=c(1:n))
+for(i in 1:100){
+  randomDataFrame[i,] <- data.frame('count'=randomList[[i]]$count,'winRate'=randomList[[i]]$winRate,'winMoney'=randomList[[i]]$winMoney)
+    randomDataFrameCom[i,] <- data.frame('count1'=randomListCom[[i]]$count1,'count3'=randomListCom[[i]]$count3,'count6'=randomListCom[[i]]$count6,'winRate'=randomListCom[[i]]$winRate,'winMoney'=randomListCom[[i]]$winMoney)
+}
+```
+
+```{r}
+summary(randomDataFrame)
+```
+
+```{r}
+write.csv(summary(randomDataFrame),file = './data/randomDataFrame.csv')
+```
+
+```{r}
+summary(randomDataFrameCom)
 ```
 
